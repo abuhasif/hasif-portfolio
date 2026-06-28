@@ -1,50 +1,56 @@
 const skillGroups = [
   {
-    title: "Frontend",
-    skills: ["React", "TypeScript", "JavaScript", "HTML", "CSS", "SVG", "Tailwind CSS"],
+    title: "Frontend Engineering",
+    level: "Strong",
+    skills: ["React", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS", "SVG"],
   },
   {
-    title: "Programming",
-    skills: ["C++", "C#", "Data Structures", "Algorithms", "Game Development"],
+    title: "Game & Systems",
+    level: "Applied",
+    skills: ["C++", "C#", "Custom Engines", "FMOD", "Data Structures", "Algorithms"],
   },
   {
-    title: "Tools",
-    skills: ["Git", "Vite", "Electron", "VS Code", "html2canvas"],
+    title: "Tools & Workflow",
+    level: "Daily",
+    skills: ["Git", "Vite", "Electron", "Visual Studio", "Android Studio", "Figma", "Canva"],
   },
   {
-    title: "Cloud / DevOps",
+    title: "Cloud & DevOps",
+    level: "Learning",
     skills: ["Azure", "Azure Functions", "Cosmos DB", "Terraform", "GitHub Actions"],
   },
 ];
 
 const Skills = () => {
   return (
-    <section id="skills" className="mx-auto max-w-6xl px-6 py-24">
-      <p className="text-sm font-medium text-cyan-400">Skills</p>
+    <section id="skills" className="section-shell">
+      <div className="section-heading">
+        <p className="eyebrow">Skills</p>
+        <div className="section-title-row">
+          <h2>Tools I use to ship polished interfaces.</h2>
+          <p>
+            My core strength is frontend development, supported by game systems,
+            tooling, and cloud fundamentals.
+          </p>
+        </div>
+      </div>
 
-      <h2 className="mt-3 text-3xl font-bold md:text-4xl">
-        Technologies I work with
-      </h2>
-
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
         {skillGroups.map((group) => (
-          <div
-            key={group.title}
-            className="rounded-2xl border border-white/10 bg-white/5 p-6"
-          >
-            <h3 className="font-bold text-cyan-300">{group.title}</h3>
+          <article key={group.title} className="content-card">
+            <div className="flex items-center justify-between gap-4">
+              <h3 className="font-semibold text-[#102033]">{group.title}</h3>
+              <span className="status-chip">{group.level}</span>
+            </div>
 
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-2">
               {group.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-full bg-white/10 px-3 py-1 text-sm text-slate-200"
-                >
+                <span key={skill} className="tech-chip">
                   {skill}
                 </span>
               ))}
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </section>

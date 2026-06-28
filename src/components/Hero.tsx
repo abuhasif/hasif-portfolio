@@ -1,33 +1,126 @@
-const Hero = () => {
+import type { PageId } from "../App";
+import selfPortrait from "../assets/Self.jpg";
+
+const focusItems = [
+  "React and TypeScript interfaces",
+  "Operational tools and infographic workflows",
+  "Custom C++ game systems",
+];
+
+type HeroProps = {
+  onNavigate: (page: PageId) => void;
+};
+
+const Hero = ({ onNavigate }: HeroProps) => {
   return (
-    <section className="mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 pt-20">
-      <p className="mb-4 text-sm font-medium text-cyan-400">
-        Computer Science Student · Frontend Developer · UI/UX
-      </p>
+    <section className="mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-5 pb-12 pt-28 md:px-6">
+      <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+          <p className="eyebrow">Computer Science Student / Frontend Developer / UI Systems</p>
 
-      <h1 className="max-w-4xl text-5xl font-bold tracking-tight md:text-7xl">
-        Hi, I’m Hasif. I build practical software tools with clean interfaces.
-      </h1>
+          <h1 className="mt-5 max-w-4xl text-5xl font-bold tracking-normal text-[#102033] md:text-7xl">
+            I build practical software tools with clear, usable interfaces.
+          </h1>
 
-      <p className="mt-6 max-w-2xl text-lg text-slate-300">
-        I’m a Computer Science student specialising in Interactive Media and Game Development,
-        with experience building frontend tools, infographic generators, and interactive systems.
-      </p>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5F6F82]">
+            I am Hasif, an Interactive Media and Game Development undergraduate at
+            Singapore Institute of Technology. I work across React frontends,
+            internal productivity tools, and C++ game systems.
+          </p>
 
-      <div className="mt-8 flex flex-wrap gap-4">
-        <a
-          href="#projects"
-          className="rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 hover:bg-cyan-300"
-        >
-          View Projects
-        </a>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button type="button" onClick={() => onNavigate("projects")} className="primary-button">
+              View projects
+            </button>
+            <button type="button" onClick={() => onNavigate("about")} className="secondary-button">
+              Contact me
+            </button>
+            <a href="/Resume.pdf" className="secondary-button">
+              Resume
+            </a>
+          </div>
 
-        <a
-          href="/Resume.pdf"
-          className="rounded-xl border border-white/20 px-5 py-3 font-semibold hover:bg-white/10"
-        >
-          Download Resume
-        </a>
+          <dl className="mt-10 grid max-w-2xl grid-cols-3 gap-3">
+            <div className="metric-card">
+              <dt>Focus</dt>
+              <dd>UI Tools</dd>
+            </div>
+            <div className="metric-card">
+              <dt>Stack</dt>
+              <dd>React</dd>
+            </div>
+            <div className="metric-card">
+              <dt>Base</dt>
+              <dd>Singapore</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div className="hero-visual" aria-label="Portrait and current profile">
+          <div className="border-b border-[#D5E0EA]/70 p-5">
+            <img
+              src={selfPortrait}
+              alt="Portrait of Abu Hasif"
+              className="aspect-[4/5] w-full rounded-[18px] object-cover object-center"
+            />
+          </div>
+
+          <div className="flex items-center justify-between px-5 py-4">
+            <div>
+              <p className="text-xs font-semibold uppercase text-[#5F6F82]">Current profile</p>
+              <h2 className="mt-1 text-lg font-semibold text-[#102033]">Software / UI Developer</h2>
+            </div>
+            <span className="rounded-full bg-[#DDF7FB] px-3 py-1 text-xs font-bold text-[#C2410C]">
+              Available
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className="hero-visual p-5" aria-label="Portfolio work summary">
+        <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="rounded-lg border border-[#D5E0EA]/70 bg-[#DDF7FB]/70 p-4">
+            <p className="text-sm font-semibold text-[#0F766E]">Latest project</p>
+            <p className="mt-2 text-2xl font-bold text-[#102033]">Cloud-Native Developer Portfolio</p>
+            <p className="mt-2 text-sm leading-6 text-[#5F6F82]">
+              A React and TypeScript portfolio evolving toward Azure deployment,
+              serverless APIs, CI/CD, and infrastructure automation.
+            </p>
+          </div>
+
+          <div className="rounded-lg border border-[#D5E0EA]/70 bg-[#FFFFFF]/75 p-4">
+            <div className="mb-3 flex items-center justify-between text-xs font-semibold uppercase text-[#5F6F82]">
+              <span>Capability map</span>
+              <span>Frontend to systems</span>
+            </div>
+            <div className="space-y-3">
+              {[
+                ["Frontend", "92%"],
+                ["UI/UX", "82%"],
+                ["Game Systems", "74%"],
+              ].map(([label, width]) => (
+                <div key={label}>
+                  <div className="mb-1 flex justify-between text-sm text-[#5F6F82]">
+                    <span>{label}</span>
+                    <span>{width}</span>
+                  </div>
+                  <div className="h-2 rounded-full bg-[#DDF7FB]">
+                    <div className="h-2 rounded-full bg-[#0F766E]" style={{ width }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          {focusItems.map((item) => (
+            <div key={item} className="rounded-lg border border-[#D5E0EA]/70 bg-[#FFFFFF]/75 p-4">
+              <span className="block h-1.5 w-8 rounded-full bg-[#F97316]" />
+              <p className="mt-4 text-sm font-medium leading-5 text-[#102033]">{item}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

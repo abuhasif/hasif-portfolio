@@ -19,13 +19,14 @@ const Hero = ({ onNavigate }: HeroProps) => {
           <p className="eyebrow">Computer Science Student / Frontend Developer / UI Systems</p>
 
           <h1 className="mt-5 max-w-4xl text-5xl font-bold tracking-normal text-[#102033] md:text-7xl">
-            I build practical software tools with clear, usable interfaces.
+            I build frontend tools, UI systems, and game features that make complex workflows feel clear.
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5F6F82]">
-            I am Hasif, an Interactive Media and Game Development undergraduate at
-            Singapore Institute of Technology. I work across React frontends,
-            internal productivity tools, and C++ game systems.
+            I am Hasif, an Interactive Media and Game Development undergraduate
+            at Singapore Institute of Technology. My work connects React
+            interfaces, custom C++ game systems, audio programming, and practical
+            tools built for real users.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -83,8 +84,9 @@ const Hero = ({ onNavigate }: HeroProps) => {
             <p className="text-sm font-semibold text-[#0F766E]">Latest project</p>
             <p className="mt-2 text-2xl font-bold text-[#102033]">Cloud-Native Developer Portfolio</p>
             <p className="mt-2 text-sm leading-6 text-[#5F6F82]">
-              A React and TypeScript portfolio evolving toward Azure deployment,
-              serverless APIs, CI/CD, and infrastructure automation.
+              A React and TypeScript portfolio that brings together software
+              projects, game work, photography, and a clear path toward cloud
+              services and automation.
             </p>
           </div>
 

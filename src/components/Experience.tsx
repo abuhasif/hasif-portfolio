@@ -12,16 +12,6 @@ const roles = [
     ],
   },
   {
-    title: "Lifeguard",
-    company: "Atelier Aquatic Safety Pte. Ltd.",
-    period: "May 2022 - Apr 2025",
-    tags: ["Safety", "Communication"],
-    points: [
-      "Maintained swimmer safety and responded to emergency situations using First Aid and CPR skills.",
-      "Developed responsibility, communication, and calm decision-making under pressure.",
-    ],
-  },
-  {
     title: "Network Engineer Intern",
     company: "Terra Systems Pte. Ltd.",
     period: "Sept 2019 - Feb 2020",

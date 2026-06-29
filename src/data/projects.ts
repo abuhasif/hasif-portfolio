@@ -1,5 +1,5 @@
-import infographicsOne from "../assets/Infographics1.png";
-import infographicsTwo from "../assets/Infographics2.png";
+import infographicsOne from "../assets/Infographics1.webp";
+import infographicsTwo from "../assets/Infographics2.webp";
 import ironDomeGameplay from "../assets/iron-dome-gameplay.webm";
 import ironDomeUpgrade from "../assets/iron-dome-upgrade.webm";
 
@@ -38,30 +38,31 @@ export const projects: Project[] = [
     category: "Cloud",
     status: "In progress",
     description:
-      "This portfolio, designed as a practical showcase for frontend craft, serverless APIs, deployment automation, and infrastructure planning.",
-    impact: "Turns personal work into a maintainable product surface with CI/CD and cloud expansion planned.",
+      "A personal portfolio built as a polished product surface for my software, UI, game, and photography work.",
+    impact: "Gives recruiters and collaborators one clear place to understand my work, technical range, and current direction.",
     tech: ["React", "TypeScript", ".NET", "Azure", "Terraform", "GitHub Actions"],
     highlights: [
-      "Built a responsive portfolio with componentized sections and reusable data.",
-      "Planned Azure Static Web Apps deployment with serverless backend APIs.",
-      "Designed future visitor tracking, contact workflow, CI/CD, and IaC support.",
+      "Built a responsive multi-page portfolio with reusable project data and interactive project previews.",
+      "Added photography, local media previews, project filtering, and accessible page navigation.",
+      "Planned serverless contact, visitor tracking, CI/CD, and infrastructure automation as future cloud additions.",
     ],
     image: "/projects/portfolio-dashboard.webp",
     imageAlt: "Screenshot of the cloud-native developer portfolio homepage.",
     github: "https://github.com/abuhasif/hasif-portfolio",
+    demo: "https://hasif-portfolio.vercel.app/#",
   },
   {
     title: "MRT Disruption & Delay Infographic Generator",
     category: "Frontend",
     status: "Shipped",
     description:
-      "A production-focused internal tool developed during my SBS Transit internship to generate commuter-facing MRT delay and disruption visuals.",
-    impact: "Reduced repetitive design work and improved consistency for NEL and DTL communication assets.",
+      "An internal React and Electron tool developed during my SBS Transit internship to generate commuter-facing MRT disruption and delay infographics.",
+    impact: "Reduced repetitive design work and helped standardize NEL and DTL communication visuals during time-sensitive disruption scenarios.",
     tech: ["React", "TypeScript", "Vite", "Electron", "SVG", "html2canvas"],
     highlights: [
-      "Built dynamic NEL and DTL delay and disruption infographic views.",
-      "Implemented station range selection, service legends, and export handling.",
-      "Refined UI flows for operators producing time-sensitive commuter updates.",
+      "Built dynamic NEL and DTL infographic views for delay and disruption scenarios.",
+      "Implemented station range selection, service legends, SVG composition, and image export handling.",
+      "Improved the workflow for producing consistent commuter-facing visuals quickly.",
     ],
     gallery: [
       {
@@ -82,13 +83,13 @@ export const projects: Project[] = [
     category: "Game",
     status: "Academic",
     description:
-      "A first-person sci-fi action game developed with a custom C++ game engine, objective-based encounters, combat feedback, and a neon industrial setting.",
-    impact: "Owned audio integration and player-facing UI systems inside a multi-discipline game project.",
+      "A first-person sci-fi action game built with a custom C++ engine, featuring objective-based encounters, combat feedback, and a neon industrial environment.",
+    impact: "Owned the audio pipeline and player-facing menu systems, connecting engine-level audio support to the final gameplay experience.",
     tech: ["C++", "Custom Engine", "FMOD", "Gameplay", "UI Systems", "3D Audio"],
     highlights: [
-      "Integrated FMOD and FMOD Studio into a custom C++ engine.",
-      "Managed sound effects, background music, cutscene audio, 3D spatial audio, and feedback sounds.",
-      "Implemented pause and settings menu UI with audio-related player controls.",
+      "Integrated FMOD and FMOD Studio into the custom C++ engine.",
+      "Managed sound effects, background music, cutscene audio, 3D spatial audio, and player feedback sounds.",
+      "Implemented pause and settings menu UI so players could control game and audio options.",
     ],
     demo: "https://youtu.be/ViNrqHM-r1M",
     videoEmbed: "https://www.youtube.com/embed/ViNrqHM-r1M",
@@ -99,8 +100,8 @@ export const projects: Project[] = [
     category: "Game",
     status: "Academic",
     description:
-      "A 2D defence game developed using a custom C++ game engine.",
-    impact: "Owned audio playback systems and key player-facing UI menus for a custom-engine 2D game.",
+      "A 2D defence game built with a custom C++ engine, focused on fast arcade-style player feedback and upgrade-driven play.",
+    impact: "Delivered the audio integration and menu UI that supported core player feedback, settings control, and game flow.",
     tech: [
       "C++",
       "Custom Game Engine",
@@ -109,9 +110,9 @@ export const projects: Project[] = [
       "UI Programming",
     ],
     highlights: [
-      "Developed the audio engine integration for FMOD and FMOD Studio within a custom C++ game engine.",
-      "Managed all in-game audio playback, including sound effects, background music, cutscene audio, 2D audio, and player feedback sounds.",
-      "Implemented UI systems for the pause menu and settings menu, supporting player control over game options and audio-related settings.",
+      "Developed FMOD and FMOD Studio integration inside the custom C++ engine.",
+      "Managed sound effects, background music, cutscene audio, 2D audio, and feedback sounds.",
+      "Implemented pause and settings menus so players could control game and audio-related options.",
     ],
     demo: "https://youtu.be/yckFXJIR0D0",
     videoEmbed: "https://www.youtube.com/embed/yckFXJIR0D0",
@@ -132,12 +133,12 @@ export const projects: Project[] = [
     status: "Academic",
     description:
       "Academic graphics and geometry work covering bounding volumes, intersections, transforms, and spatial calculations.",
-    impact: "Strengthened practical 3D maths knowledge for game and graphics programming.",
+    impact: "Strengthened the practical 3D maths foundation I use when working on game and graphics programming problems.",
     tech: ["C++", "GLM", "AABB", "Bounding Sphere", "Frustum", "Intersections"],
     highlights: [
-      "Worked with AABB, sphere transformations, and intersection logic.",
-      "Implemented geometry utilities for graphics-related calculations.",
-      "Practised debugging spatial reasoning problems with clear test cases.",
+      "Worked with AABB, sphere transformations, frustums, and intersection logic.",
+      "Implemented reusable geometry utilities for graphics-related calculations.",
+      "Practised debugging spatial reasoning problems with clear expected cases.",
     ],
     image: "/projects/geometry-collision-toolbox.webp",
     imageAlt: "Screenshot or diagram representing geometry and collision detection work.",

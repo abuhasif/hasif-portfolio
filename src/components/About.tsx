@@ -18,6 +18,21 @@ const strengths = [
   },
 ];
 
+const education = [
+  {
+    school: "Singapore Institute of Technology",
+    qualification: "Bachelor: Computer Science in Interactive Media and Game Development",
+    period: "08/2022 - Present",
+    location: "Singapore",
+  },
+  {
+    school: "Singapore Polytechnic",
+    qualification: "Diploma: Computer Engineering",
+    period: "04/2017 - 05/2020",
+    location: "Singapore",
+  },
+];
+
 const About = () => {
   const [copyState, setCopyState] = useState("Copy email");
 
@@ -66,6 +81,23 @@ const About = () => {
         ))}
       </div>
 
+      <div className="mt-8">
+        <p className="eyebrow">Education</p>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          {education.map((item) => (
+            <article key={item.school} className="content-card">
+              <h3 className="text-lg font-semibold text-[#102033]">{item.school}</h3>
+              <p className="mt-2 text-sm font-semibold text-[var(--primary)]">
+                {item.qualification}
+              </p>
+              <p className="mt-3 text-sm leading-6 text-[#5F6F82]">
+                {item.period} | {item.location}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+
       <div className="contact-panel mt-8">
         <div className="section-heading">
           <p className="eyebrow">Contact</p>
@@ -92,6 +124,14 @@ const About = () => {
             className="secondary-button"
           >
             LinkedIn
+          </a>
+          <a
+            href="https://www.instagram.com/burnt.shots/"
+            target="_blank"
+            rel="noreferrer"
+            className="secondary-button"
+          >
+            Instagram
           </a>
           <a
             href="https://github.com/abuhasif"

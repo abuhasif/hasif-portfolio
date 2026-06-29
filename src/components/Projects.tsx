@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { projects, type Project, type ProjectCategory } from "../data/projects";
 
 const filters: Array<"All" | ProjectCategory> = [
@@ -13,25 +13,118 @@ const defaultProjectTitle = "Cloud-Native Developer Portfolio";
 
 const ProjectVisual = ({ project }: { project: Project }) => {
   const [imageFailed, setImageFailed] = useState(false);
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState<number | null>(null);
   const shouldShowImage = project.image && !imageFailed;
+
+  const closeGallery = () => setActiveGalleryIndex(null);
+  const showPreviousGalleryImage = useCallback(() => {
+    setActiveGalleryIndex((current) =>
+      current === null || !project.gallery?.length
+        ? current
+        : (current - 1 + project.gallery.length) % project.gallery.length
+    );
+  }, [project.gallery]);
+  const showNextGalleryImage = useCallback(() => {
+    setActiveGalleryIndex((current) =>
+      current === null || !project.gallery?.length
+        ? current
+        : (current + 1) % project.gallery.length
+    );
+  }, [project.gallery]);
+
+  useEffect(() => {
+    if (activeGalleryIndex === null) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeGallery();
+      }
+
+      if (event.key === "ArrowLeft") {
+        showPreviousGalleryImage();
+      }
+
+      if (event.key === "ArrowRight") {
+        showNextGalleryImage();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeGalleryIndex, showNextGalleryImage, showPreviousGalleryImage]);
 
   if (project.gallery?.length) {
     return (
-      <div className="grid gap-3 p-3 md:grid-cols-2">
-        {project.gallery.map((image) => (
-          <figure key={image.src} className="overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--card)]">
-            <img
-              src={image.src}
-              alt={image.alt}
-              className="aspect-video w-full object-cover"
-              loading="lazy"
-            />
-            <figcaption className="px-3 py-2 text-xs font-semibold text-[var(--muted)]">
-              {image.label}
-            </figcaption>
-          </figure>
-        ))}
-      </div>
+      <>
+        <div className="grid gap-3 p-3 md:grid-cols-2">
+          {project.gallery.map((image, index) => (
+            <button
+              key={image.src}
+              type="button"
+              className="overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--card)] text-left"
+              onClick={() => setActiveGalleryIndex(index)}
+              aria-label={`Open ${image.label}`}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="aspect-video w-full object-cover"
+                loading="lazy"
+              />
+              <span className="block px-3 py-2 text-xs font-semibold text-[var(--muted)]">
+                {image.label}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {activeGalleryIndex !== null && (
+          <div
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-[#102033]/85 p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${project.title} gallery preview`}
+            onClick={closeGallery}
+          >
+            <div className="relative w-full max-w-6xl" onClick={(event) => event.stopPropagation()}>
+              <img
+                src={project.gallery[activeGalleryIndex].src}
+                alt={project.gallery[activeGalleryIndex].alt}
+                className="max-h-[82vh] w-full rounded-[20px] object-contain"
+              />
+
+              <button
+                type="button"
+                className="absolute right-3 top-3 grid h-10 w-10 place-items-center rounded-lg bg-white text-xl font-bold text-[#102033]"
+                onClick={closeGallery}
+                aria-label="Close preview"
+              >
+                x
+              </button>
+
+              <button
+                type="button"
+                className="absolute left-3 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-lg bg-white text-2xl font-bold text-[#102033]"
+                onClick={showPreviousGalleryImage}
+                aria-label="Previous image"
+              >
+                {"<"}
+              </button>
+
+              <button
+                type="button"
+                className="absolute right-3 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-lg bg-white text-2xl font-bold text-[#102033]"
+                onClick={showNextGalleryImage}
+                aria-label="Next image"
+              >
+                {">"}
+              </button>
+            </div>
+          </div>
+        )}
+      </>
     );
   }
 

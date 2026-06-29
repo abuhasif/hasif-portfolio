@@ -18,6 +18,16 @@ const socialLinks = [
     ),
   },
   {
+    label: "Instagram",
+    href: "https://www.instagram.com/burnt.shots/",
+    icon: (
+      <>
+        <path d="M7.75 2.75h8.5a5 5 0 0 1 5 5v8.5a5 5 0 0 1-5 5h-8.5a5 5 0 0 1-5-5v-8.5a5 5 0 0 1 5-5Zm0 1.7a3.3 3.3 0 0 0-3.3 3.3v8.5a3.3 3.3 0 0 0 3.3 3.3h8.5a3.3 3.3 0 0 0 3.3-3.3v-8.5a3.3 3.3 0 0 0-3.3-3.3h-8.5Z" />
+        <path d="M12 8.2a3.8 3.8 0 1 1 0 7.6 3.8 3.8 0 0 1 0-7.6Zm0 1.7a2.1 2.1 0 1 0 0 4.2 2.1 2.1 0 0 0 0-4.2ZM17.1 7.9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
+      </>
+    ),
+  },
+  {
     label: "Email",
     href: "mailto:hasifbakar@gmail.com",
     icon: (

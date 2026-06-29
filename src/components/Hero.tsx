@@ -16,17 +16,16 @@ const Hero = ({ onNavigate }: HeroProps) => {
     <section className="mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-5 pb-12 pt-28 md:px-6">
       <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
-          <p className="eyebrow">Computer Science Student / Frontend Developer / UI Systems</p>
+          <p className="eyebrow">Frontend Development / Digital Services / User-Centred Systems</p>
 
           <h1 className="mt-5 max-w-4xl text-5xl font-bold tracking-normal text-[#102033] md:text-7xl">
-            I build frontend tools, UI systems, and game features that make complex workflows feel clear.
+            I build practical digital tools with clear, usable interfaces.
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5F6F82]">
             I am Hasif, an Interactive Media and Game Development undergraduate
-            at Singapore Institute of Technology. My work connects React
-            interfaces, custom C++ game systems, audio programming, and practical
-            tools built for real users.
+            at SIT. I build React interfaces, UI systems, and practical tools,
+            with experience in custom C++ game systems and audio programming.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -48,7 +47,7 @@ const Hero = ({ onNavigate }: HeroProps) => {
             </div>
             <div className="metric-card">
               <dt>Stack</dt>
-              <dd>React</dd>
+              <dd>React+TypeScript</dd>
             </div>
             <div className="metric-card">
               <dt>Base</dt>

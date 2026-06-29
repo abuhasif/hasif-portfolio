@@ -1,12 +1,15 @@
 const { app } = require("@azure/functions");
 
 app.http("message", {
-  methods: ["GET"],
+  methods: ["GET", "POST"],
   authLevel: "anonymous",
   handler: async () => {
     return {
-      jsonBody: {
+      body: JSON.stringify({
         text: "Hello from Azure Functions!",
+      }),
+      headers: {
+        "Content-Type": "application/json",
       },
     };
   },

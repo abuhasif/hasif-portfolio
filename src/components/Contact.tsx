@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
+
+const email = "hasifbakar@gmail.com";
 
 const Contact = () => {
+  const [copyState, setCopyState] = useState("Copy email");
   const [status, setStatus] = useState("");
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopyState("Copied");
+      window.setTimeout(() => setCopyState("Copy email"), 1800);
+    } catch {
+      setCopyState("Copy failed");
+      window.setTimeout(() => setCopyState("Copy email"), 1800);
+    }
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const form = event.currentTarget;
@@ -26,64 +40,109 @@ const Contact = () => {
 
       const result = await response.json();
 
-      if (result.success) {
-        setStatus("Message sent successfully!");
-        form.reset();
-      } else {
-        setStatus("Something went wrong.");
+      if (!response.ok || !result.success) {
+        setStatus(result.message ?? "Something went wrong.");
+        return;
       }
+
+      setStatus("Message sent successfully.");
+      form.reset();
     } catch {
-      setStatus("Failed to send message.");
+      setStatus("The contact form is not connected in this environment. Please email me directly.");
     }
   };
 
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-6 py-24">
-      <p className="text-sm font-medium text-cyan-400">Contact</p>
+    <div className="contact-panel mt-8">
+      <div className="section-heading">
+        <p className="eyebrow">Contact</p>
+        <div className="section-title-row">
+          <h2>Let us build something useful.</h2>
+          <p>
+            I am open to software engineering, frontend development, UI/UX, and
+            graduate programme opportunities.
+          </p>
+        </div>
+      </div>
 
-      <h2 className="mt-3 text-3xl font-bold md:text-4xl">
-        Let’s connect
-      </h2>
+      <div className="mt-8 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="flex flex-wrap content-start gap-3">
+          <a href={`mailto:${email}`} className="primary-button">
+            Email me
+          </a>
+          <button type="button" onClick={handleCopyEmail} className="secondary-button">
+            {copyState}
+          </button>
+          <a
+            href="https://www.linkedin.com/in/abuhasif"
+            target="_blank"
+            rel="noreferrer"
+            className="secondary-button"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://www.instagram.com/burnt.shots/"
+            target="_blank"
+            rel="noreferrer"
+            className="secondary-button"
+          >
+            Instagram
+          </a>
+          <a
+            href="https://github.com/abuhasif"
+            target="_blank"
+            rel="noreferrer"
+            className="secondary-button"
+          >
+            GitHub
+          </a>
+        </div>
 
-      <p className="mt-4 max-w-2xl text-slate-300">
-        Feel free to reach out if you would like to discuss opportunities,
-        projects, or collaborations.
-      </p>
+        <form onSubmit={handleSubmit} className="grid gap-3">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <label className="grid gap-2 text-sm font-semibold text-[var(--text)]">
+              Name
+              <input
+                name="name"
+                required
+                className="rounded-lg border border-[var(--border)] bg-[var(--section)] px-4 py-3 text-sm font-medium text-[var(--text)] outline-none transition focus:border-[var(--primary)]"
+                placeholder="Your name"
+              />
+            </label>
 
-      <form onSubmit={handleSubmit} className="mt-8 max-w-2xl space-y-4">
-        <input
-          name="name"
-          placeholder="Your name"
-          required
-          className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-cyan-400"
-        />
+            <label className="grid gap-2 text-sm font-semibold text-[var(--text)]">
+              Email
+              <input
+                name="email"
+                type="email"
+                required
+                className="rounded-lg border border-[var(--border)] bg-[var(--section)] px-4 py-3 text-sm font-medium text-[var(--text)] outline-none transition focus:border-[var(--primary)]"
+                placeholder="you@example.com"
+              />
+            </label>
+          </div>
 
-        <input
-          name="email"
-          type="email"
-          placeholder="Your email"
-          required
-          className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-cyan-400"
-        />
+          <label className="grid gap-2 text-sm font-semibold text-[var(--text)]">
+            Message
+            <textarea
+              name="message"
+              required
+              rows={5}
+              className="resize-none rounded-lg border border-[var(--border)] bg-[var(--section)] px-4 py-3 text-sm font-medium text-[var(--text)] outline-none transition focus:border-[var(--primary)]"
+              placeholder="Tell me about the opportunity or project."
+            />
+          </label>
 
-        <textarea
-          name="message"
-          placeholder="Your message"
-          required
-          rows={5}
-          className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-cyan-400"
-        />
-
-        <button
-          type="submit"
-          className="rounded-xl bg-cyan-400 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300"
-        >
-          Send Message
-        </button>
-
-        {status && <p className="text-sm text-slate-300">{status}</p>}
-      </form>
-    </section>
+          <div className="flex flex-wrap items-center gap-3">
+            <button type="submit" className="primary-button">
+              Send message
+            </button>
+            {status && <p className="text-sm font-medium text-[var(--muted)]">{status}</p>}
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 

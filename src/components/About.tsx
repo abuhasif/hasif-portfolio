@@ -1,7 +1,5 @@
-import { useState } from "react";
+import Contact from "./Contact";
 import selfPortrait from "../assets/Self.jpg";
-
-const email = "hasifbakar@gmail.com";
 
 const strengths = [
   {
@@ -34,19 +32,6 @@ const education = [
 ];
 
 const About = () => {
-  const [copyState, setCopyState] = useState("Copy email");
-
-  const handleCopyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(email);
-      setCopyState("Copied");
-      window.setTimeout(() => setCopyState("Copy email"), 1800);
-    } catch {
-      setCopyState("Copy failed");
-      window.setTimeout(() => setCopyState("Copy email"), 1800);
-    }
-  };
-
   return (
     <section id="about" className="section-shell">
       <div className="grid gap-8 lg:grid-cols-[1fr_280px] lg:items-start">
@@ -98,51 +83,7 @@ const About = () => {
         </div>
       </div>
 
-      <div className="contact-panel mt-8">
-        <div className="section-heading">
-          <p className="eyebrow">Contact</p>
-          <div className="section-title-row">
-            <h2>Let us build something useful.</h2>
-            <p>
-              I am open to software engineering, frontend development, UI/UX, and
-              graduate programme opportunities.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a href={`mailto:${email}`} className="primary-button">
-            Email me
-          </a>
-          <button type="button" onClick={handleCopyEmail} className="secondary-button">
-            {copyState}
-          </button>
-          <a
-            href="https://www.linkedin.com/in/abuhasif"
-            target="_blank"
-            rel="noreferrer"
-            className="secondary-button"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://www.instagram.com/burnt.shots/"
-            target="_blank"
-            rel="noreferrer"
-            className="secondary-button"
-          >
-            Instagram
-          </a>
-          <a
-            href="https://github.com/abuhasif"
-            target="_blank"
-            rel="noreferrer"
-            className="secondary-button"
-          >
-            GitHub
-          </a>
-        </div>
-      </div>
+      <Contact />
     </section>
   );
 };

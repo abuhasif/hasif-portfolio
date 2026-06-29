@@ -284,9 +284,10 @@ const Projects = () => {
                       {project.title}
                     </h3>
                     {project.role && (
-                      <p className="mt-1 text-sm font-semibold text-[var(--primary)]">
+                      <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-[var(--badge-border)] bg-[var(--accent-soft)] px-3 py-1 text-xs font-bold uppercase tracking-normal text-[var(--primary-dark)]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
                         {project.role}
-                      </p>
+                      </div>
                     )}
                     <p className="mt-3 max-w-3xl text-sm leading-6 text-[#5F6F82]">
                       {project.description}

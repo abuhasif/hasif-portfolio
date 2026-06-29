@@ -35,6 +35,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "Cloud-Native Developer Portfolio",
+    role: "Frontend Developer",
     category: "Cloud",
     status: "In progress",
     description:
@@ -52,7 +53,8 @@ export const projects: Project[] = [
     demo: "https://hasif-portfolio.vercel.app/#",
   },
   {
-    title: "MRT Disruption & Delay Infographic Generator",
+    title: "MRT Infographic Generator",
+    role: "Frontend Developer",
     category: "Frontend",
     status: "Shipped",
     description:
@@ -80,6 +82,7 @@ export const projects: Project[] = [
   },
   {
     title: "Unarmed",
+    role: "Sound Engineer & UI Programmer",
     category: "Game",
     status: "Academic",
     description:
@@ -129,6 +132,7 @@ export const projects: Project[] = [
   },
   {
     title: "Geometry & Collision Detection Toolbox",
+    role: "Graphics & Systems Programmer",
     category: "Systems",
     status: "Academic",
     description:

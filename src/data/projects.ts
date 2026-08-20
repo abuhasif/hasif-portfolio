@@ -9,7 +9,7 @@ export type Project = {
   title: string;
   role?: string;
   category: ProjectCategory;
-  status: "Shipped" | "In progress" | "Academic";
+  status: "Completed" | "Shipped" | "Academic";
   description: string;
   impact: string;
   tech: string[];
@@ -34,10 +34,39 @@ export type Project = {
 // image: "/projects/portfolio-dashboard.webp"
 export const projects: Project[] = [
   {
+    title: "Photo Culling Project",
+    role: "Developer",
+    category: "Systems",
+    status: "Completed",
+    description:
+      "An Electron and React desktop workflow for reviewing photo sets, scoring image sharpness, detecting faces, and quickly marking keepers or rejects.",
+    impact:
+      "Turns repetitive photo selection into a structured review process with keyboard-first triage, saved project state, and clear export and reject handling.",
+    tech: ["React", "TypeScript", "Electron", "Sharp", "MediaPipe", "ExifTool"],
+    highlights: [
+      "Built a desktop workflow for importing folders, generating previews, and reviewing large photo sets.",
+      "Added multi-signal sharpness analysis, face detection, face sharpness checks, and similar-image grouping to support selection decisions.",
+      "Implemented keyboard-first rating and pick/reject actions, saved project state, picked-photo export, and rejected-photo organization.",
+    ],
+    gallery: [
+      {
+        src: "/projects/photo-culler-empty-state.webp",
+        alt: "Photo Culler empty workspace ready to import a folder.",
+        label: "Empty workspace",
+      },
+      {
+        src: "/projects/photo-culler-review-workspace.webp",
+        alt: "Photo Culler review workspace showing thumbnails, face detection, and culling controls.",
+        label: "Review workspace",
+      },
+    ],
+    github: "https://github.com/abuhasif/photo-culler",
+  },
+  {
     title: "Cloud-Native Developer Portfolio",
-    role: "Frontend Developer",
+    role: "Developer",
     category: "Cloud",
-    status: "In progress",
+    status: "Completed",
     description:
       "A personal portfolio built as a polished product surface for my software, UI, game, and photography work.",
     impact: "Gives recruiters and collaborators one clear place to understand my work, technical range, and current direction.",
@@ -47,8 +76,6 @@ export const projects: Project[] = [
       "Added photography, local media previews, project filtering, and accessible page navigation.",
       "Planned serverless contact, visitor tracking, CI/CD, and infrastructure automation as future cloud additions.",
     ],
-    image: "/projects/portfolio-dashboard.webp",
-    imageAlt: "Screenshot of the cloud-native developer portfolio homepage.",
     github: "https://github.com/abuhasif/hasif-portfolio",
     demo: "https://hasif-portfolio.vercel.app/#",
   },

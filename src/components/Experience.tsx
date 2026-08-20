@@ -1,26 +1,23 @@
 const roles = [
   {
-    title: "Software / UI Developer Intern",
+    title: "Software / Product Developer Intern",
     company: "SBS Transit Ltd",
     period: "May 2025 - Apr 2026",
-    tags: ["React", "Electron", "UI Systems"],
+    tags: ["UI/UX", "Frontend Development", "Rail Digitalisation"],
     points: [
-      "Contributed to an MRT Infographic Generator for train delay and disruption communication.",
-      "Worked on UI design, infographic generation logic, output handling, and usability refinement.",
-      "Built and refined visual flows for NEL and DTL service disruption and delay scenarios.",
-      "Gained exposure to prototyping, 3D printing, and transport maintenance-related workflows.",
+      "Worked with stakeholders to understand operational needs and translate requirements into practical digital solutions.",
+      "Contributed to development, UI design, prototyping, testing, troubleshooting, and iterative improvements across digitalisation initiatives.",
+      "Supported technology events and roadshows by presenting and demonstrating innovation initiatives such as IMOS to internal and external audiences.",
     ],
   },
   {
     title: "Network Engineer Intern",
-    company: "Terra Systems Pte. Ltd.",
-    period: "Sept 2019 - Feb 2020",
-    tags: ["Networking", "Teamwork"],
+    company: "Terra Systems Pte Ltd",
+    period: "Sep 2019 - Feb 2020",
+    tags: ["Networking", "Troubleshooting", "Documentation"],
     points: [
-      "Applied learned concepts directly in an industry environment.",
-      "Analysed problems and collaborated with teams to develop solutions.",
-      "Contributed to group projects and presentations with fellow interns.",
-      "Built hands-on familiarity with software tools and technical workflows.",
+      "Assisted with network setup, configuration, troubleshooting, and testing in a real-world technical environment.",
+      "Supported technical projects and documentation while gaining hands-on experience with networking tools, hardware, and IT workflows.",
     ],
   },
 ];
@@ -33,8 +30,8 @@ const Experience = () => {
         <div className="section-title-row">
           <h2>Work shaped by responsibility and delivery.</h2>
           <p>
-            My experience spans software internship work, safety-critical service,
-            and early technical exposure in network engineering.
+            My experience spans rail digitalisation, UI/UX and frontend delivery,
+            plus early technical exposure in network engineering.
           </p>
         </div>
       </div>

@@ -1,23 +1,39 @@
 const skillGroups = [
   {
-    title: "Frontend Engineering",
-    level: "Strong",
-    skills: ["React", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS", "SVG"],
+    title: "UI/UX Design",
+    level: "Core",
+    skills: [
+      "Interaction Design",
+      "User-Centred Design",
+      "Requirements Gathering",
+      "Stakeholder Collaboration",
+      "Wireframing & Prototyping",
+    ],
   },
   {
-    title: "Game & Systems",
+    title: "Frontend Development",
+    level: "Core",
+    skills: ["React", "TypeScript", "JavaScript", "HTML", "CSS", "SVG", "Tailwind CSS"],
+  },
+  {
+    title: "Application Development",
     level: "Applied",
-    skills: ["C++", "C#", "Custom Engines", "FMOD", "Data Structures", "Algorithms"],
+    skills: ["Electron", "Android Studio"],
   },
   {
-    title: "Tools & Workflow",
-    level: "Daily",
-    skills: ["Git", "Vite", "Electron", "Visual Studio", "Android Studio", "Figma", "Canva"],
+    title: "Version Control & DevOps",
+    level: "Working",
+    skills: ["Git", "GitHub", "GitHub Actions"],
   },
   {
-    title: "Cloud & DevOps",
-    level: "Learning",
-    skills: ["Azure", "Azure Functions", "Cosmos DB", "Terraform", "GitHub Actions"],
+    title: "Cloud & Deployment",
+    level: "Working",
+    skills: ["Azure", "Vercel"],
+  },
+  {
+    title: "Languages",
+    level: "Fluent",
+    skills: ["English", "Malay"],
   },
 ];
 
@@ -27,10 +43,11 @@ const Skills = () => {
       <div className="section-heading">
         <p className="eyebrow">Skills</p>
         <div className="section-title-row">
-          <h2>Tools I use to ship polished interfaces.</h2>
+          <h2>Design and engineering skills for practical digital products.</h2>
           <p>
-            My core strength is frontend development, supported by game systems,
-            tooling, and cloud fundamentals.
+            My core work sits at the intersection of user-centred design, frontend
+            development, and rail digitalisation, supported by application tooling,
+            DevOps, and cloud deployment.
           </p>
         </div>
       </div>

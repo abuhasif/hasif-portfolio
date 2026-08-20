@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { projects, type Project, type ProjectCategory } from "../data/projects";
 
 const filters: Array<"All" | ProjectCategory> = [
@@ -11,12 +11,23 @@ const filters: Array<"All" | ProjectCategory> = [
 
 const defaultProjectTitle = "Cloud-Native Developer Portfolio";
 
+const hasProjectVisual = (project: Project) =>
+  Boolean(
+    project.image ||
+      project.gallery?.length ||
+      project.videos?.length ||
+      project.videoEmbed
+  );
+
 const ProjectVisual = ({ project }: { project: Project }) => {
   const [imageFailed, setImageFailed] = useState(false);
   const [activeGalleryIndex, setActiveGalleryIndex] = useState<number | null>(null);
+  const galleryDialogRef = useRef<HTMLDivElement>(null);
+  const galleryCloseButtonRef = useRef<HTMLButtonElement>(null);
+  const galleryTriggerRef = useRef<HTMLButtonElement | null>(null);
   const shouldShowImage = project.image && !imageFailed;
 
-  const closeGallery = () => setActiveGalleryIndex(null);
+  const closeGallery = useCallback(() => setActiveGalleryIndex(null), []);
   const showPreviousGalleryImage = useCallback(() => {
     setActiveGalleryIndex((current) =>
       current === null || !project.gallery?.length
@@ -34,26 +45,55 @@ const ProjectVisual = ({ project }: { project: Project }) => {
 
   useEffect(() => {
     if (activeGalleryIndex === null) {
+      galleryTriggerRef.current?.focus();
       return;
     }
+
+    galleryCloseButtonRef.current?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         closeGallery();
+        return;
       }
 
       if (event.key === "ArrowLeft") {
         showPreviousGalleryImage();
+        return;
       }
 
       if (event.key === "ArrowRight") {
         showNextGalleryImage();
+        return;
+      }
+
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const focusableElements = galleryDialogRef.current?.querySelectorAll<HTMLElement>(
+        "button, [href], input, textarea, select, [tabindex]:not([tabindex='-1'])"
+      );
+
+      if (!focusableElements?.length) {
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeGalleryIndex, showNextGalleryImage, showPreviousGalleryImage]);
+  }, [activeGalleryIndex, closeGallery, showNextGalleryImage, showPreviousGalleryImage]);
 
   if (project.gallery?.length) {
     return (
@@ -64,7 +104,10 @@ const ProjectVisual = ({ project }: { project: Project }) => {
               key={image.src}
               type="button"
               className="overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--card)] text-left"
-              onClick={() => setActiveGalleryIndex(index)}
+              onClick={(event) => {
+                galleryTriggerRef.current = event.currentTarget;
+                setActiveGalleryIndex(index);
+              }}
               aria-label={`Open ${image.label}`}
             >
               <img
@@ -72,6 +115,7 @@ const ProjectVisual = ({ project }: { project: Project }) => {
                 alt={image.alt}
                 className="aspect-video w-full object-cover"
                 loading="lazy"
+                decoding="async"
               />
               <span className="block px-3 py-2 text-xs font-semibold text-[var(--muted)]">
                 {image.label}
@@ -82,6 +126,7 @@ const ProjectVisual = ({ project }: { project: Project }) => {
 
         {activeGalleryIndex !== null && (
           <div
+            ref={galleryDialogRef}
             className="fixed inset-0 z-[60] flex items-center justify-center bg-[#102033]/85 p-4"
             role="dialog"
             aria-modal="true"
@@ -97,6 +142,7 @@ const ProjectVisual = ({ project }: { project: Project }) => {
 
               <button
                 type="button"
+                ref={galleryCloseButtonRef}
                 className="absolute right-3 top-3 grid h-10 w-10 place-items-center rounded-lg bg-white text-xl font-bold text-[#102033]"
                 onClick={closeGallery}
                 aria-label="Close preview"
@@ -135,6 +181,7 @@ const ProjectVisual = ({ project }: { project: Project }) => {
         alt={project.imageAlt ?? `${project.title} screenshot`}
         className="h-full min-h-64 w-full object-cover"
         loading="lazy"
+        decoding="async"
         onError={() => setImageFailed(true)}
       />
     );
@@ -176,11 +223,6 @@ const ProjectVisual = ({ project }: { project: Project }) => {
     <div className="project-visual-fallback">
       <span>{project.category}</span>
       <strong>{project.status}</strong>
-      <p>
-        {project.image
-          ? `Add ${project.image.replace("/projects/", "")} to public/projects`
-          : project.tech.slice(0, 3).join(" / ")}
-      </p>
     </div>
   );
 };
@@ -237,7 +279,7 @@ const Projects = () => {
         </div>
       </div>
 
-      <div className="mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Project filters">
+      <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label="Project filters">
         {filters.map((filter) => (
           <button
             key={filter}
@@ -345,9 +387,11 @@ const Projects = () => {
                       )}
                     </div>
 
-                    <div className="project-visual mt-6">
-                      <ProjectVisual project={project} />
-                    </div>
+                    {hasProjectVisual(project) && (
+                      <div className="project-visual mt-6">
+                        <ProjectVisual project={project} />
+                      </div>
+                    )}
                   </div>
                 </div>
               )}

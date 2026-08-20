@@ -1,32 +1,32 @@
 import Contact from "./Contact";
-import selfPortrait from "../assets/Self.jpg";
+import selfPortrait from "../assets/Self.webp";
 
 const strengths = [
   {
-    title: "Product-minded UI",
-    body: "I focus on flows, states, and output quality so tools stay useful under real constraints.",
+    title: "User-centred design",
+    body: "I translate operational needs into intuitive digital solutions that stay clear and useful under real constraints.",
   },
   {
-    title: "Technical range",
-    body: "Comfortable moving between React, TypeScript, C++, game systems, and cloud planning.",
+    title: "Rapid prototyping",
+    body: "I move from requirements to wireframes, prototypes, testing, and iterative improvements with a practical delivery mindset.",
   },
   {
-    title: "Operational context",
-    body: "Internship work exposed me to transport communication, deadlines, and reliability needs.",
+    title: "Practical problem-solving",
+    body: "I combine UI/UX thinking, frontend development, and technical troubleshooting to solve real workflow problems.",
   },
 ];
 
 const education = [
   {
     school: "Singapore Institute of Technology",
-    qualification: "Bachelor: Computer Science in Interactive Media and Game Development",
-    period: "08/2022 - Present",
+    qualification: "Bachelor of Science in Computer Science in Interactive Media and Game Development",
+    period: "2022 - 2026",
     location: "Singapore",
   },
   {
     school: "Singapore Polytechnic",
-    qualification: "Diploma: Computer Engineering",
-    period: "04/2017 - 05/2020",
+    qualification: "Diploma in Computer Engineering",
+    period: "2017 - 2020",
     location: "Singapore",
   },
 ];
@@ -38,11 +38,12 @@ const About = () => {
         <div className="section-heading">
           <p className="eyebrow">About</p>
           <div className="section-title-row">
-            <h2>Useful software, built with the user in mind.</h2>
+            <h2>UI/UX and frontend development for rail digitalisation.</h2>
             <p>
-              I am a Computer Science student specialising in Interactive Media and
-              Game Development at Singapore Institute of Technology. My best work
-              sits where interface design, engineering, and practical workflows meet.
+              Computer Science graduate with hands-on experience in UI/UX, frontend
+              development, and rail digitalisation. I translate operational
+              requirements into intuitive digital solutions through user-centred
+              design, rapid prototyping, and practical problem-solving.
             </p>
           </div>
         </div>

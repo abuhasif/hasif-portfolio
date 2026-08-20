@@ -1,6 +1,8 @@
 import { useState, type FormEvent } from "react";
 
 const email = "hasifbakar@gmail.com";
+const phone = "+65 8129 6162";
+const phoneHref = "tel:+6581296162";
 
 const Contact = () => {
   const [copyState, setCopyState] = useState("Copy email");
@@ -60,7 +62,7 @@ const Contact = () => {
           <h2>Let us build something useful.</h2>
           <p>
             I am open to software engineering, frontend development, UI/UX, and
-            graduate programme opportunities.
+            rail digitalisation opportunities.
           </p>
         </div>
       </div>
@@ -70,6 +72,12 @@ const Contact = () => {
           <a href={`mailto:${email}`} className="primary-button">
             Email me
           </a>
+          <a href={phoneHref} className="secondary-button">
+            {phone}
+          </a>
+          <span className="flex items-center px-1 text-sm font-medium text-[var(--muted)]">
+            Singapore
+          </span>
           <button type="button" onClick={handleCopyEmail} className="secondary-button">
             {copyState}
           </button>
@@ -138,7 +146,11 @@ const Contact = () => {
             <button type="submit" className="primary-button">
               Send message
             </button>
-            {status && <p className="text-sm font-medium text-[var(--muted)]">{status}</p>}
+            {status && (
+              <p role="status" aria-live="polite" className="text-sm font-medium text-[var(--muted)]">
+                {status}
+              </p>
+            )}
           </div>
         </form>
       </div>

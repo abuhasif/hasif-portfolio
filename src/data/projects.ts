@@ -63,6 +63,35 @@ export const projects: Project[] = [
     github: "https://github.com/abuhasif/photo-culler",
   },
   {
+    title: "BusWise AI Chatbot",
+    role: "Developer",
+    category: "Systems",
+    status: "Completed",
+    description:
+      "A local conversational assistant for Singapore bus journeys that combines AI query understanding, OneMap route planning, and a local transit data snapshot.",
+    impact:
+      "Makes bus planning more conversational by keeping route context, showing transfers on an interactive map, and answering stop and timetable questions from structured local data.",
+    tech: ["React", "TypeScript", "Python", "SQLite", "OneMap", "Qwen3.5"],
+    highlights: [
+      "Built bus-only journey planning with walking access, transfers, route options, and interactive map context.",
+      "Added conversational follow-ups for direct routes, stop services, first and last bus questions, and route changes.",
+      "Included a bundled January 2026 SQLite snapshot with clearly labelled fallback behavior when live OneMap planning is unavailable.",
+    ],
+    gallery: [
+      {
+        src: "/projects/buswise-home.webp",
+        alt: "BusWise journey planner showing a Singapore map and bus route search fields.",
+        label: "Journey planner",
+      },
+      {
+        src: "/projects/buswise-route-results.webp",
+        alt: "BusWise route results showing two bus options with journey duration, walking distance, and transfer steps.",
+        label: "Route results",
+      },
+    ],
+    github: "https://github.com/abuhasif/BusWise-AI-Chatbot",
+  },
+  {
     title: "Cloud-Native Developer Portfolio",
     role: "Developer",
     category: "Cloud",

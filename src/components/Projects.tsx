@@ -1,15 +1,22 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { projects, type Project, type ProjectCategory } from "../data/projects";
+import { projects, type Project, type ProjectFormat } from "../data/projects";
 
-const filters: Array<"All" | ProjectCategory> = [
-  "All",
-  "Frontend",
-  "Game",
-  "Cloud",
-  "Systems",
-];
+const filters: Array<"All" | ProjectFormat> = ["All", "App", "Web", "Game"];
 
-const defaultProjectTitle = "Cloud-Native Developer Portfolio";
+const filterLabels: Record<(typeof filters)[number], string> = {
+  All: "All projects",
+  App: "Apps",
+  Web: "Web",
+  Game: "Games",
+};
+
+const formatClasses: Record<ProjectFormat, string> = {
+  App: "format-chip-app",
+  Web: "format-chip-web",
+  Game: "format-chip-game",
+};
+
+const defaultProjectTitle = "Photo Culling Project";
 
 const hasProjectVisual = (project: Project) =>
   Boolean(
@@ -113,7 +120,11 @@ const ProjectVisual = ({ project }: { project: Project }) => {
               <img
                 src={image.src}
                 alt={image.alt}
-                className="aspect-video w-full object-cover"
+                className={`w-full ${
+                  image.orientation === "portrait"
+                    ? "aspect-[9/16] bg-[#102033] object-contain"
+                    : "aspect-video object-cover"
+                }`}
                 loading="lazy"
                 decoding="async"
               />
@@ -235,7 +246,7 @@ const Projects = () => {
     const filteredProjects =
       activeFilter === "All"
         ? projects
-        : projects.filter((project) => project.category === activeFilter);
+        : projects.filter((project) => project.format === activeFilter);
 
     if (!openProjectTitle) {
       return filteredProjects;
@@ -260,7 +271,7 @@ const Projects = () => {
     const firstProject =
       filter === "All"
         ? projects.find((project) => project.title === defaultProjectTitle)
-        : projects.find((project) => project.category === filter);
+        : projects.find((project) => project.format === filter);
 
     setOpenProjectTitle(firstProject?.title ?? "");
   };
@@ -272,25 +283,30 @@ const Projects = () => {
         <div className="section-title-row">
           <h2>Projects with practical outcomes</h2>
           <p>
-            A focused set of frontend tools, game systems, cloud planning, and
-            graphics work. Filter the list and expand each project for the role,
-            decisions, and technical details.
+            Browse the work by project type: desktop and data-driven apps,
+            web experiences, or game and graphics systems. Expand each project
+            for the role, decisions, and technical details.
           </p>
         </div>
       </div>
 
-      <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label="Project filters">
+      <div className="project-filter-bar mt-8" role="group" aria-label="Project type filters">
         {filters.map((filter) => (
           <button
             key={filter}
             type="button"
             onClick={() => handleFilterChange(filter)}
-            className={`interactive-pill ${
+            className={`project-filter ${
               activeFilter === filter ? "interactive-pill-active" : ""
             }`}
             aria-pressed={activeFilter === filter}
           >
-            {filter}
+            <span>{filterLabels[filter]}</span>
+            <span className="project-filter-count">
+              {filter === "All"
+                ? projects.length
+                : projects.filter((project) => project.format === filter).length}
+            </span>
           </button>
         ))}
       </div>
@@ -305,7 +321,9 @@ const Projects = () => {
           return (
             <article
               key={project.title}
-              className={`project-card ${isOpen ? "project-card-open lg:col-span-2" : ""}`}
+              className={`project-card project-card-format-${project.format.toLowerCase()} ${
+                isOpen ? "project-card-open lg:col-span-2" : ""
+              }`}
             >
               <button
                 type="button"
@@ -318,8 +336,8 @@ const Projects = () => {
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="status-chip">{project.status}</span>
-                      <span className="text-xs font-semibold uppercase text-[#5F6F82]">
-                        {project.category}
+                      <span className={`format-chip ${formatClasses[project.format]}`}>
+                        {project.format}
                       </span>
                     </div>
                     <h3 className="mt-4 text-xl font-semibold text-[#102033]">
@@ -351,8 +369,8 @@ const Projects = () => {
               </div>
 
               {isOpen && (
-                <div id={detailsId} className="mt-6">
-                  <div>
+                <div id={detailsId} className="project-expanded mt-6">
+                  <div className="project-expanded-copy">
                     <p className="impact-note">{project.impact}</p>
 
                     <ul className="mt-5 space-y-3 text-sm leading-6 text-[#5F6F82]">
@@ -387,12 +405,12 @@ const Projects = () => {
                       )}
                     </div>
 
-                    {hasProjectVisual(project) && (
-                      <div className="project-visual mt-6">
-                        <ProjectVisual project={project} />
-                      </div>
-                    )}
                   </div>
+                  {hasProjectVisual(project) && (
+                    <div className="project-visual">
+                      <ProjectVisual project={project} />
+                    </div>
+                  )}
                 </div>
               )}
             </article>

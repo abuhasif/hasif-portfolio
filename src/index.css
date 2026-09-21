@@ -103,6 +103,19 @@ section {
     box-shadow: var(--shadow);
   }
 
+  .hero-work-strip {
+    @apply grid items-center gap-8 border-y border-[var(--border)] py-8 md:grid-cols-[0.9fr_1.1fr] md:py-10;
+  }
+
+  .hero-work-copy {
+    @apply md:pl-2;
+  }
+
+  .hero-work-image {
+    @apply aspect-video w-full rounded-[20px] border border-[var(--border)] object-cover;
+    box-shadow: var(--shadow);
+  }
+
   .card,
   .content-card,
   .timeline-card,
@@ -112,23 +125,68 @@ section {
   }
 
   .project-card {
-    @apply hover:border-[var(--primary)]/50;
+    @apply rounded-xl p-5 shadow-none hover:border-[var(--primary)]/50 hover:bg-[#FCFEFF];
+  }
+
+  .project-card-format-app {
+    border-top: 3px solid #0F766E;
+  }
+
+  .project-card-format-web {
+    border-top: 3px solid #2563EB;
+  }
+
+  .project-card-format-game {
+    border-top: 3px solid #F97316;
   }
 
   .project-card-open {
-    @apply border-[var(--primary)]/50 bg-[var(--card)];
+    @apply border-[var(--primary)]/50 bg-[var(--card)] shadow-[0_12px_28px_rgba(16,32,51,0.06)];
+  }
+
+  .project-filter-bar {
+    @apply flex w-fit max-w-full flex-wrap gap-1 rounded-xl border border-[var(--border)] bg-[#EAF2F9] p-1;
+  }
+
+  .project-filter {
+    @apply inline-flex min-h-10 items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-[var(--muted)] transition hover:bg-[var(--card)] hover:text-[var(--primary-dark)];
+  }
+
+  .project-filter-count {
+    @apply grid h-5 min-w-5 place-items-center rounded-full bg-[var(--card)] px-1.5 text-xs font-bold text-[var(--muted)];
   }
 
   .interactive-pill {
     @apply rounded-lg border border-[var(--badge-border)] bg-[var(--card)]/75 px-4 py-2 text-sm font-semibold text-[var(--muted)] transition hover:border-[var(--primary)] hover:bg-[var(--accent-soft)] hover:text-[var(--primary-dark)];
   }
 
-  .interactive-pill-active {
+  .interactive-pill-active,
+  .project-filter.interactive-pill-active {
     @apply border-[var(--primary)] bg-[var(--primary)] text-white hover:bg-[var(--primary-dark)] hover:text-white;
+  }
+
+  .project-filter.interactive-pill-active .project-filter-count {
+    @apply bg-white/15 text-white;
   }
 
   .status-chip {
     @apply rounded-full border border-[var(--accent)]/40 bg-[var(--highlight-soft)] px-3 py-1 text-xs font-bold text-[var(--accent-dark)];
+  }
+
+  .format-chip {
+    @apply rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-[0.08em];
+  }
+
+  .format-chip-app {
+    @apply border-[#0F766E]/30 bg-[#DDF7FB] text-[#0F766E];
+  }
+
+  .format-chip-web {
+    @apply border-[#2563EB]/25 bg-[#DBEAFE] text-[#1D4ED8];
+  }
+
+  .format-chip-game {
+    @apply border-[#F97316]/35 bg-[#FFEDD5] text-[#C2410C];
   }
 
   .skill-badge,
@@ -142,6 +200,14 @@ section {
 
   .impact-note {
     @apply rounded-lg border border-[var(--accent)]/60 bg-[var(--highlight-soft)]/75 p-4 text-sm font-medium leading-6 text-[var(--primary-dark)];
+  }
+
+  .project-expanded {
+    @apply grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start;
+  }
+
+  .project-expanded-copy {
+    @apply min-w-0;
   }
 
   .link-button {

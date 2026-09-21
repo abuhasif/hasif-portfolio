@@ -1,12 +1,6 @@
 import type { PageId } from "../App";
 import selfPortrait from "../assets/Self.webp";
 
-const focusItems = [
-  "User-centred interface design",
-  "Rail digitalisation workflows",
-  "Rapid prototyping and practical tools",
-];
-
 type HeroProps = {
   onNavigate: (page: PageId) => void;
 };
@@ -16,16 +10,16 @@ const Hero = ({ onNavigate }: HeroProps) => {
     <section className="mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-5 pb-12 pt-28 md:px-6">
       <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
-          <p className="eyebrow">UI/UX &amp; Frontend Development / Rail Digitalisation</p>
+          <p className="eyebrow">Software Development / UI/UX / Interactive Systems</p>
 
           <h1 className="mt-5 max-w-4xl text-5xl font-bold tracking-normal text-[#102033] md:text-7xl">
-            I turn operational requirements into clear digital experiences.
+            I build practical software for real workflows.
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5F6F82]">
             I am Hasif, a Computer Science graduate with hands-on experience in
-            UI/UX, frontend development, and rail digitalisation. I translate
-            operational needs into intuitive interfaces through user-centred
+            frontend development, Android applications, and rail digitalisation.
+            I turn operational needs into clear interfaces through user-centred
             design, rapid prototyping, and practical problem-solving.
           </p>
 
@@ -78,50 +72,31 @@ const Hero = ({ onNavigate }: HeroProps) => {
         </div>
       </div>
 
-      <div className="hero-visual p-5" aria-label="Portfolio work summary">
-        <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-lg border border-[#D5E0EA]/70 bg-[#DDF7FB]/70 p-4">
-            <p className="text-sm font-semibold text-[#0F766E]">Latest project</p>
-            <p className="mt-2 text-2xl font-bold text-[#102033]">MRT Infographic Generator</p>
-            <p className="mt-2 text-sm leading-6 text-[#5F6F82]">
-              A React and TypeScript desktop tool for commuter-facing rail
-              disruption and delay infographics.
-            </p>
-          </div>
-
-          <div className="rounded-lg border border-[#D5E0EA]/70 bg-[#FFFFFF]/75 p-4">
-            <div className="mb-3 flex items-center justify-between text-xs font-semibold uppercase text-[#5F6F82]">
-              <span>Capability map</span>
-              <span>Frontend to systems</span>
-            </div>
-            <div className="space-y-3">
-              {[
-                ["Frontend", "92%"],
-                ["UI/UX", "82%"],
-                ["Rail Digitalisation", "74%"],
-              ].map(([label, width]) => (
-                <div key={label}>
-                  <div className="mb-1 flex justify-between text-sm text-[#5F6F82]">
-                    <span>{label}</span>
-                    <span>{width}</span>
-                  </div>
-                  <div className="h-2 rounded-full bg-[#DDF7FB]">
-                    <div className="h-2 rounded-full bg-[#0F766E]" style={{ width }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      <div className="hero-work-strip" aria-label="Featured project">
+        <div className="hero-work-copy">
+          <p className="eyebrow">Selected work / App</p>
+          <h2 className="mt-3 text-2xl font-bold text-[#102033] md:text-3xl">
+            Photo Culling Project
+          </h2>
+          <p className="mt-3 max-w-xl text-sm leading-6 text-[#5F6F82]">
+            A desktop workflow for reviewing large photo sets, detecting quality
+            issues, and making faster keep-or-reject decisions.
+          </p>
+          <button
+            type="button"
+            onClick={() => onNavigate("projects")}
+            className="mt-5 inline-flex items-center text-sm font-bold text-[#0F766E] underline decoration-[#F97316] decoration-2 underline-offset-4"
+          >
+            Explore the project
+          </button>
         </div>
-
-        <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          {focusItems.map((item) => (
-            <div key={item} className="rounded-lg border border-[#D5E0EA]/70 bg-[#FFFFFF]/75 p-4">
-              <span className="block h-1.5 w-8 rounded-full bg-[#F97316]" />
-              <p className="mt-4 text-sm font-medium leading-5 text-[#102033]">{item}</p>
-            </div>
-          ))}
-        </div>
+        <img
+          src="/projects/photo-culler-review-workspace.webp"
+          alt="Photo Culler review workspace showing thumbnails and culling controls."
+          className="hero-work-image"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </section>
   );

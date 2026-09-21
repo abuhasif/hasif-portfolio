@@ -4,11 +4,13 @@ import ironDomeGameplay from "../assets/iron-dome-gameplay.webm";
 import ironDomeUpgrade from "../assets/iron-dome-upgrade.webm";
 
 export type ProjectCategory = "Frontend" | "Game" | "Cloud" | "Systems";
+export type ProjectFormat = "App" | "Web" | "Game";
 
 export type Project = {
   title: string;
   role?: string;
   category: ProjectCategory;
+  format: ProjectFormat;
   status: "Completed" | "Shipped" | "Academic";
   description: string;
   impact: string;
@@ -20,6 +22,7 @@ export type Project = {
     src: string;
     alt: string;
     label: string;
+    orientation?: "landscape" | "portrait";
   }>;
   github?: string;
   demo?: string;
@@ -37,9 +40,10 @@ export const projects: Project[] = [
     title: "Photo Culling Project",
     role: "Developer",
     category: "Systems",
+    format: "App",
     status: "Completed",
     description:
-      "An Electron and React desktop workflow for reviewing photo sets, scoring image sharpness, detecting faces, and quickly marking keepers or rejects.",
+      "A desktop workflow for photographers who need to review large photo sets, spot quality issues, and decide quickly which images to keep.",
     impact:
       "Turns repetitive photo selection into a structured review process with keyboard-first triage, saved project state, and clear export and reject handling.",
     tech: ["React", "TypeScript", "Electron", "Sharp", "MediaPipe", "ExifTool"],
@@ -66,9 +70,10 @@ export const projects: Project[] = [
     title: "BusWise AI Chatbot",
     role: "Developer",
     category: "Systems",
+    format: "Web",
     status: "Completed",
     description:
-      "A local conversational assistant for Singapore bus journeys that combines AI query understanding, OneMap route planning, and a local transit data snapshot.",
+      "A browser-based bus planning assistant for people who want clear Singapore route options without navigating a complex transit workflow.",
     impact:
       "Makes bus planning more conversational by keeping route context, showing transfers on an interactive map, and answering stop and timetable questions from structured local data.",
     tech: ["React", "TypeScript", "Python", "SQLite", "OneMap", "Qwen3.5"],
@@ -92,12 +97,51 @@ export const projects: Project[] = [
     github: "https://github.com/abuhasif/BusWise-AI-Chatbot",
   },
   {
+    title: "BusWise Mobile",
+    role: "Android Developer",
+    category: "Systems",
+    format: "App",
+    status: "Completed",
+    description:
+      "An Android companion for commuters who need nearby bus stops, guided journey planning, and useful answers while on the move.",
+    impact:
+      "Extends the BusWise experience to mobile with location-aware stop search, structured route responses, and background reply notifications.",
+    tech: ["Kotlin", "Jetpack Compose", "Android SDK", "Location Services", "Material 3"],
+    highlights: [
+      "Built Home, Maps, and Settings navigation with a Compose-based Android interface.",
+      "Integrated nearby-stop search using Android location services and expandable service cards.",
+      "Added direct-route results, same-stop transfers, and background notifications for completed replies.",
+    ],
+    gallery: [
+      {
+        src: "/projects/buswise-mobile-journey-results.png",
+        alt: "BusWise Mobile journey results screen showing a bus route response.",
+        label: "Journey results",
+        orientation: "portrait",
+      },
+      {
+        src: "/projects/buswise-mobile-nearby-stops.png",
+        alt: "BusWise Mobile nearby stops screen showing available bus services.",
+        label: "Nearby stops",
+        orientation: "portrait",
+      },
+      {
+        src: "/projects/buswise-mobile-reply-notification.png",
+        alt: "BusWise Mobile notification showing a completed background reply.",
+        label: "Background reply",
+        orientation: "portrait",
+      },
+    ],
+    github: "https://github.com/abuhasif/BusWise-Mobile",
+  },
+  {
     title: "Cloud-Native Developer Portfolio",
     role: "Developer",
     category: "Cloud",
+    format: "Web",
     status: "Completed",
     description:
-      "A personal portfolio built as a polished product surface for my software, UI, game, and photography work.",
+      "A personal site designed to help recruiters and collaborators quickly understand my software, UI, game, and photography work.",
     impact: "Gives recruiters and collaborators one clear place to understand my work, technical range, and current direction.",
     tech: ["React", "TypeScript", ".NET", "Azure", "Terraform", "GitHub Actions"],
     highlights: [
@@ -112,9 +156,10 @@ export const projects: Project[] = [
     title: "MRT Infographic Generator",
     role: "Frontend Developer",
     category: "Frontend",
+    format: "App",
     status: "Shipped",
     description:
-      "An internal React and Electron tool developed during my SBS Transit internship to generate commuter-facing MRT disruption and delay infographics.",
+      "An internal tool for officers who need to produce consistent MRT disruption and delay graphics quickly during time-sensitive incidents.",
     impact: "Reduced repetitive design work and helped standardize NEL and DTL communication visuals during time-sensitive disruption scenarios.",
     tech: ["React", "TypeScript", "Vite", "Electron", "SVG", "html2canvas"],
     highlights: [
@@ -140,9 +185,10 @@ export const projects: Project[] = [
     title: "Unarmed",
     role: "Sound Engineer & UI Programmer",
     category: "Game",
+    format: "Game",
     status: "Academic",
     description:
-      "A first-person sci-fi action game built with a custom C++ engine, featuring objective-based encounters, combat feedback, and a neon industrial environment.",
+      "A first-person sci-fi action game focused on clear combat feedback, objective-based encounters, and a neon industrial environment.",
     impact: "Owned the audio pipeline and player-facing menu systems, connecting engine-level audio support to the final gameplay experience.",
     tech: ["C++", "Custom Engine", "FMOD", "Gameplay", "UI Systems", "3D Audio"],
     highlights: [
@@ -157,9 +203,10 @@ export const projects: Project[] = [
     title: "Iron Dome",
     role: "Sound Engineer & UI Programmer",
     category: "Game",
+    format: "Game",
     status: "Academic",
     description:
-      "A 2D defence game built with a custom C++ engine, focused on fast arcade-style player feedback and upgrade-driven play.",
+      "A 2D defence game built around fast arcade feedback, upgrade-driven play, and a focused player control loop.",
     impact: "Delivered the audio integration and menu UI that supported core player feedback, settings control, and game flow.",
     tech: [
       "C++",
@@ -190,9 +237,10 @@ export const projects: Project[] = [
     title: "Geometry & Collision Detection Toolbox",
     role: "Graphics & Systems Programmer",
     category: "Systems",
+    format: "Game",
     status: "Academic",
     description:
-      "Academic graphics and geometry work covering bounding volumes, intersections, transforms, and spatial calculations.",
+      "A graphics toolbox for understanding how bounding volumes, transforms, and intersections support reliable 3D interactions.",
     impact: "Strengthened the practical 3D maths foundation I use when working on game and graphics programming problems.",
     tech: ["C++", "GLM", "AABB", "Bounding Sphere", "Frustum", "Intersections"],
     highlights: [

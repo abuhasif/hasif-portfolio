@@ -37,10 +37,11 @@ const Contact = () => {
           name: formData.get("name"),
           email: formData.get("email"),
           message: formData.get("message"),
+          website: formData.get("website"),
         }),
       });
 
-      const result = await response.json();
+      const result = await response.json().catch(() => ({}));
 
       if (!response.ok || !result.success) {
         setStatus(result.message ?? "Something went wrong.");
@@ -107,13 +108,15 @@ const Contact = () => {
           </a>
         </div>
 
-        <form onSubmit={handleSubmit} className="grid gap-3">
+        <form onSubmit={handleSubmit} className="relative grid gap-3">
           <div className="grid gap-3 sm:grid-cols-2">
             <label className="grid gap-2 text-sm font-semibold text-[var(--text)]">
               Name
               <input
                 name="name"
                 required
+                maxLength={100}
+                autoComplete="name"
                 className="rounded-lg border border-[var(--border)] bg-[var(--section)] px-4 py-3 text-sm font-medium text-[var(--text)] outline-none transition focus:border-[var(--primary)]"
                 placeholder="Your name"
               />
@@ -125,6 +128,8 @@ const Contact = () => {
                 name="email"
                 type="email"
                 required
+                maxLength={254}
+                autoComplete="email"
                 className="rounded-lg border border-[var(--border)] bg-[var(--section)] px-4 py-3 text-sm font-medium text-[var(--text)] outline-none transition focus:border-[var(--primary)]"
                 placeholder="you@example.com"
               />
@@ -136,11 +141,20 @@ const Contact = () => {
             <textarea
               name="message"
               required
+              maxLength={5000}
               rows={5}
               className="resize-none rounded-lg border border-[var(--border)] bg-[var(--section)] px-4 py-3 text-sm font-medium text-[var(--text)] outline-none transition focus:border-[var(--primary)]"
               placeholder="Tell me about the opportunity or project."
             />
           </label>
+
+          {/* Honeypot: hidden from people, but bots that fill every field get filtered out by the API. */}
+          <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+            <label>
+              Website
+              <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </label>
+          </div>
 
           <div className="flex flex-wrap items-center gap-3">
             <button type="submit" className="primary-button">

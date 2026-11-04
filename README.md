@@ -96,7 +96,6 @@ The Azure deployment includes API routes under:
 Current API endpoints:
 
 ```txt
-GET  /api/message
 POST /api/contact
 ```
 

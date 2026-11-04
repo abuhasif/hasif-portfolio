@@ -4,9 +4,21 @@ const email = "hasifbakar@gmail.com";
 const phone = "+65 8129 6162";
 const phoneHref = "tel:+6581296162";
 
+// Formspree form endpoint. Create a form at https://formspree.io and paste its
+// ID here (the part after /f/). The ID is public by design, so it is safe to commit.
+const FORMSPREE_FORM_ID = "xkjjkzdw";
+const formEndpoint = `https://formspree.io/f/${FORMSPREE_FORM_ID}`;
+const fallbackMessage = `Sorry, the message could not be sent. Please email me at ${email}.`;
+
+type FormspreeResponse = {
+  ok?: boolean;
+  errors?: Array<{ message?: string }>;
+};
+
 const Contact = () => {
   const [copyState, setCopyState] = useState("Copy email");
   const [status, setStatus] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const handleCopyEmail = async () => {
     try {
@@ -22,36 +34,37 @@ const Contact = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (isSending) return;
+
     const form = event.currentTarget;
     const formData = new FormData(form);
 
+    setIsSending(true);
     setStatus("Sending...");
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(formEndpoint, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify({
-          name: formData.get("name"),
-          email: formData.get("email"),
-          message: formData.get("message"),
-          website: formData.get("website"),
-        }),
+        body: formData,
       });
 
-      const result = await response.json().catch(() => ({}));
+      const result: FormspreeResponse = await response.json().catch(() => ({}));
 
-      if (!response.ok || !result.success) {
-        setStatus(result.message ?? "Something went wrong.");
+      if (!response.ok) {
+        const reason = result.errors?.map((error) => error.message).filter(Boolean).join(" ");
+        setStatus(reason ? `${reason} You can also email me at ${email}.` : fallbackMessage);
         return;
       }
 
-      setStatus("Message sent successfully.");
+      setStatus("Thanks! Your message has been sent. I will reply by email.");
       form.reset();
     } catch {
-      setStatus("The contact form is not connected in this environment. Please email me directly.");
+      setStatus(fallbackMessage);
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -148,23 +161,27 @@ const Contact = () => {
             />
           </label>
 
-          {/* Honeypot: hidden from people, but bots that fill every field get filtered out by the API. */}
+          <input type="hidden" name="_subject" value="New message from your portfolio" />
+
+          {/* Honeypot: hidden from people. Formspree silently drops submissions that fill "_gotcha". */}
           <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
             <label>
-              Website
-              <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+              Leave this field empty
+              <input name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
             </label>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <button type="submit" className="primary-button">
-              Send message
+            <button
+              type="submit"
+              className="primary-button disabled:cursor-not-allowed disabled:opacity-60"
+              disabled={isSending}
+            >
+              {isSending ? "Sending..." : "Send message"}
             </button>
-            {status && (
-              <p role="status" aria-live="polite" className="text-sm font-medium text-[var(--muted)]">
-                {status}
-              </p>
-            )}
+            <p role="status" aria-live="polite" className="text-sm font-medium text-[var(--muted)]">
+              {status}
+            </p>
           </div>
         </form>
       </div>

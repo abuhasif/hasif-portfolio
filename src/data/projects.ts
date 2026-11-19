@@ -71,18 +71,25 @@ export const projects: Project[] = [
     role: "Developer",
     category: "Systems",
     format: "Web",
-    status: "Completed",
+    status: "Shipped",
     description:
-      "A browser-based bus planning assistant for people who want clear Singapore route options without navigating a complex transit workflow.",
+      "A conversational bus planning assistant for people who want clear Singapore route options without navigating a complex transit workflow, now live on Google Cloud Run.",
     impact:
-      "Makes bus planning more conversational by keeping route context, showing transfers on an interactive map, and answering stop and timetable questions from structured local data.",
-    tech: ["React", "TypeScript", "Python", "SQLite", "OneMap", "Qwen3.5"],
+      "Makes bus planning more conversational by keeping route context, drawing live OneMap routes on an interactive map, and answering stop and timetable questions, all behind a containerised, security-hardened deployment.",
+    tech: ["React", "TypeScript", "Python", "Node.js", "Express", "SQLite", "Docker", "Cloud Run", "GitHub Actions", "OneMap", "Qwen3.5"],
     highlights: [
-      "Built bus-only journey planning with walking access, transfers, route options, and interactive map context.",
-      "Added conversational follow-ups for direct routes, stop services, first and last bus questions, and route changes.",
-      "Included a bundled January 2026 SQLite snapshot with clearly labelled fallback behavior when live OneMap planning is unavailable.",
+      "Built bus-only journey planning with walking access, transfers, multiple route options, and routes drawn along the roads on an interactive map.",
+      "Added conversational follow-ups for direct routes, stop services, first and last bus questions, and route changes, with a rule-based limited mode when the language model is offline.",
+      "Containerised the React web app, Python API and a new Express gateway with Docker Compose, and deployed them to Google Cloud Run.",
+      "Hardened the stack with a single public gateway, token-authenticated API calls, layered rate limits, a nonce-based Content Security Policy, and non-root read-only containers.",
+      "Set up GitHub Actions CI covering linting, type checks, React Testing Library, Node, gateway and Python tests, plus a Docker Compose smoke test.",
     ],
     gallery: [
+      {
+        src: "/projects/buswise-live-route.webp",
+        alt: "BusWise planning a journey from Woodlands Interchange to Hougang Interchange, with the bus route drawn along the roads on the map and three journey options.",
+        label: "Live route on map",
+      },
       {
         src: "/projects/buswise-home.webp",
         alt: "BusWise journey planner showing a Singapore map and bus route search fields.",
@@ -95,6 +102,7 @@ export const projects: Project[] = [
       },
     ],
     github: "https://github.com/abuhasif/BusWise-AI-Chatbot",
+    demo: "https://buswise-gateway-kklq4y2keq-uc.a.run.app",
   },
   {
     title: "BusWise Mobile",
